@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <h1>Register</h1>
+</div>
+
+<div class="card-body">
+    <form method="POST">
+        {% csrf_token %}
+        {% if form.errors %}
+            {% for field in form %}
+                {% if field.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <span style="color:red">{{ field.errors|striptags }}</span>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <label>{{form.email.label}}</label>
+        {{form.email}}
+
+        <label>{{form.first_name.label}}</label>
+        {{form.first_name}}
+
+        <label>{{form.password1.label}}</label>
+        {{form.password1}}
+
+        <label>{{form.password2.label}}</label> 
+    
+        {{form.password2}} 
+        <input style="margin-top:10px ;" class="button" type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+
+
+{% endblock content %}
